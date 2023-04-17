@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace ExamenGrupal
 {
-    abstract class NPC : Character
+    abstract class NPC 
     {
-        protected string name;
-        protected float life;
-        protected string type;
+        public string name;
+        public float life;
+        public string type;
 
-        public NPC(string name, float life, string type)
+        public NPC(string name, float life, string type )
         {
             this.name = name;
             this.life = life;
             this.type = type;
         }
 
-        public virtual void HabilitiesNPC()
-        {
-            return;
-        }
+        public abstract void HabilitiesNPC();
+        
+           
+        
     }
 
 }
