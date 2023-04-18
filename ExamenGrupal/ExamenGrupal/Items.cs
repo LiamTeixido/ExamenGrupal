@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace ExamenGrupal
 {
-    class Items
+    abstract class Items
     {
+        protected string name;
         protected float price;
+        protected string type;
 
-        public Items(float price)
+        public Items(string name, float price, string type)
         {
+            this.name = name;
             this.price = price;
+            this.type = type;
         }
     }
 }
