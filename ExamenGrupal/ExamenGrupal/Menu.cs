@@ -55,7 +55,7 @@ namespace ExamenGrupal
                 switch (opcion)
                 {
                     case 1:
-                        
+                        CreatePlayer();
                         break;
                     case 2:
                         
@@ -92,6 +92,70 @@ namespace ExamenGrupal
 
         }
 
+
+         public void CreatePlayer()
+        {
+            string name;
+            int level;
+            float price;
+             Console.WriteLine ("Introducir el nombre del jugador")
+               name = Console.ReadLine();
+            Console.WriteLine ("Introducir el nivel del jugador")
+               level = Console.ReadLine();
+            Console.WriteLine("Introducir su economia del jugador")
+                price = Console.ReadLine();
+            
+            players.Add(new Player(name, level, price));
+
+        }
+
+        public void CreateItem()
+        {
+            Console.WriteLine("¿Que items desea agregar a su inventario del jugador?");
+            Console.WriteLine("1. Pociones");
+            Console.WriteLine("2. Armas");
+            switch (option)
+            {
+                case "1":
+
+                    string name;
+                    float price;
+                    string type;
+                    float capacity;
+                    Console.WriteLine("Introducir el nombre de la poción")
+                      name = Console.ReadLine();
+                    Console.WriteLine("Introducir el preció de la poción")
+                        price = Console.ReadLine();
+                    Console.WriteLine("Introducir el tipo de la poción")
+                        type = Console.ReadLine();
+                    Console.WriteLine("Introducir es la capacidad de la poción")
+                        capacity = Console.ReadLine();
+
+                    items.Add(new Item(name, price, type));
+
+
+
+
+
+                case "2":
+                    string name;
+                    float price;
+                    string type;
+                    float damage;
+                    Console.WriteLine("Introducir el nombre de la arma")
+                      name = Console.ReadLine();
+                    Console.WriteLine("Introducir el preció de la arma")
+                        price = Console.ReadLine();
+                    Console.WriteLine("Introducir el tipo de la arma")
+                        type = Console.ReadLine();
+                    Console.WriteLine("Introducir el daño de la arma")
+                        damage = Console.ReadLine();
+
+                    items.Add(new Item(name, price, type));
+
+            }
+
+        }
        
     }
 }
