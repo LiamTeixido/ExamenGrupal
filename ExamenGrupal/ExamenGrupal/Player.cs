@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExamenGrupal
 {
-    class Player : Character
+    class Player : IShowData
     {
         protected string name;
         protected int level;
@@ -18,5 +18,11 @@ namespace ExamenGrupal
             this.level = level;
             this.price = price;
         }
+
+        public string ShowData()
+        {
+            return $"Player Name: {name}\nItemList: {itemList}\nExperience: {exp}\nlevel: {level}\nMoney: {money}";
+        }
+
     }
 }

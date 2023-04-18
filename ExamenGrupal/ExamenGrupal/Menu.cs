@@ -58,13 +58,13 @@ namespace ExamenGrupal
                         CreatePlayer();
                         break;
                     case 2:
-                        
+                        CreateSeller();
                         break;
                     case 3:
                         
                         break;
                     case 4:
-                        
+                        CreatePlayerDataList()
                         break;
                     case 5:
                         
@@ -108,6 +108,26 @@ namespace ExamenGrupal
             players.Add(new Player(name, level, price));
 
         }
+
+        public void CreateSeller()
+        {
+
+            string name;
+            float life;
+            string type;
+            float money;
+            Console.WriteLine("Introducir el nombre del vendedor")
+               name = Console.ReadLine();
+            Console.WriteLine("Introducir la vida del vendedor")
+               life = Console.ReadLine();
+            Console.WriteLine("Introducir el tipo del vendedor")
+                type = Console.ReadLine();
+            Console.WriteLine("Introducir el dinero del vendedor")
+                money = Console.ReadLine();
+            npcs.Add(new NPC(name, life, type, money));
+        }
+
+        
 
         public void CreateItem()
         {
@@ -153,9 +173,22 @@ namespace ExamenGrupal
 
                     items.Add(new Item(name, price, type));
 
-            }
-
+            }            
         }
-       
+
+
+        public void CreatePlayerDataList()
+        {
+            Console.WriteLine("Que dato desea ver?")
+            Console.WriteLine("Nombre: " + players.name);
+            Console.WriteLine("Nivel: " + players.level);
+            Console.WriteLine("Dinero: " + players.price);
+
+
+            public string ShowData()
+            {
+                return "Name: " + Name + "\r\nLevel: " + Level + "\r\nPrice: " + Price;
+            }
+        }  
     }
 }

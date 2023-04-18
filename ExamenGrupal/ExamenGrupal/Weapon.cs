@@ -6,15 +6,22 @@ using System.Threading.Tasks;
 
 namespace ExamenGrupal
 {
-    class Weapon: Items
+class Weapon : Items, IShowData
     {
-        public float damage;
-        
+        public int damage;
+        public Weapon(string name, string type, int price, int damage) : base(name, price, type)
+        {
+            this.damage = damage;
+        }
 
-
-         public Weapon ( float damage ,string name , float price , string type) : base( name , price , type)
+        public override void ItemMethod()
         {
 
+        }
+
+        public string ShowData()
+        {
+            return $"Weapon Name: {name}\nType: {type}\nPrice: {price}\nDamage: {damage}";
         }
     }
 }
