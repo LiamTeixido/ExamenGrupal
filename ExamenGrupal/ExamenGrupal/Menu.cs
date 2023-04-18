@@ -9,6 +9,7 @@ namespace ExamenGrupal
     class Menu
     {
         static List<Player> players;
+        static List<Enemy> enemies;
         static List<NPC> npcs;
         private List<Item> items;
         private bool continueFlag;
