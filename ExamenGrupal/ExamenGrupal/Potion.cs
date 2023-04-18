@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExamenGrupal
 {
-    class Potion : Items, IShowData
+    class Potion: Items, IShowData
     {
         public int capacity;
         public Potion(string name, string type, int price, int capacity) : base(name, price, type)
