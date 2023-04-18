@@ -6,23 +6,28 @@ using System.Threading.Tasks;
 
 namespace ExamenGrupal
 {
-    class Talkers
+    class Talkers : NPC
     {
-        private List<string> texts;
+        public List<string> textList;
 
-        public Talkers()
+        public Talkers(string name, int life, string type, List<string> textList) : base(name, life, type)
         {
-            texts = new List<string>();
+            this.textList = textList;
         }
 
-        public List<string> GetTexts()
+        public override void HabilitiesNPC()
         {
-            return texts;
+
         }
 
-        public void AddTexts(string Texts)
+        //public string ShowData()
+        //{
+        //    return base.ShowData() + "\nNPC Item List: " + string.Join(", ", textList);
+        //}
+
+        public string ShowData()
         {
-            texts.Add(Texts);
+            return $"Weapon Name: {name}\nLife: {life}\nType: {type}\nTextList: {textList}";
         }
     }
 }

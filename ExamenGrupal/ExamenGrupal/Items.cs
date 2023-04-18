@@ -8,15 +8,17 @@ namespace ExamenGrupal
 {
     abstract class Items
     {
-        protected string name;
-        protected float price;
-        protected string type;
+        public string name;
+        public int price;
+        public string type;
 
-        public Items(string name, float price, string type)
+        public Items(string name, int price, string type)
         {
             this.name = name;
             this.price = price;
             this.type = type;
         }
+
+        public abstract void ItemMethod();
     }
 }
