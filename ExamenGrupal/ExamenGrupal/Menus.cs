@@ -33,21 +33,229 @@ namespace ExamenGrupal
         {
             while (endingFlag)
             {
-                
+                Console.WriteLine("========== MENÚ DE OPCIONES ==========");
+                Console.WriteLine("1. Crear jugador");
+                Console.WriteLine("2. Crear NPC y agregarlo a la lista de NPCs");
+                Console.WriteLine("3. Crear item y agregarlo a la lista de items");
+                Console.WriteLine("4. Listar los datos del jugador");
+                Console.WriteLine("5. Listar los datos de los NPCs");
+                Console.WriteLine("6. Listar los datos de los items");
+                Console.WriteLine("7. Eliminar un NPC");
+                Console.WriteLine("8. Eliminar un item");
+                Console.WriteLine("9. Seleccionar un item y agregarlo a un jugador o NPC");
+                Console.WriteLine("10. Salir del programa");
+                Console.WriteLine("======================================");
+
+                Console.Write("Ingresa el número de opción: ");
                 int option = Convert.ToInt32(Console.ReadLine());
 
                 switch (option)
                 {
                     case 1:
-                        DeleteItem();
+                        CreatePlayer();
                         break;
                     case 2:
+                        CreateNPC();
+                        break;
+                    case 3:
+                        CreateItem();
+                        break;
+                    case 4:
+                        PlayerData();
+                        break;
+                    case 5:
+                        NPCData();
+                        break;
+                    case 6:
+                        ItemData();
+                        break;
+                    case 7:
+                        DeleteNPC();
+                        break;
+                    case 8:
+                        DeleteItem();
+                        break;
+                    case 9:
                         SelectAndAddItem();
+                        break;
+                    case 10:
+                        Exit();
                         break;
                     default:
                         Console.WriteLine("Opción inválida. Por favor, selecciona una opción válida.");
                         break;
                 }
+            }
+
+        }
+
+        public void CreatePlayer()
+        {
+            Console.WriteLine("Introducir el nombre del jugador");
+            string name = Console.ReadLine();
+            Console.WriteLine("Introducir el nivel del jugador");
+            int level = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Introducir su economia del jugador");
+            int money = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Introducir su experiencia del jugador");
+            int exp = Convert.ToInt32(Console.ReadLine());
+
+            List<Items> itemList = new List<Items>();
+
+            players.Add(new Player(name, itemList, exp, level, money));
+        }
+
+        public void PlayerData()
+        {
+            if (players.Count > 0)
+            {
+                foreach (Player player in players)
+                {
+                    Console.WriteLine("---------");
+                    Console.WriteLine(player.ShowData());
+                }
+            }
+            else
+            {
+                Console.WriteLine("No hay PLAYERS.\n");
+            }
+
+        }
+
+        public void CreateNPC()
+        {
+            Console.Write("Enter NPC Name: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Enter Life: ");
+            int life = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Enter NPC Type (Enemy, Seller, Converser): ");
+            string type = Console.ReadLine();
+
+            List<Items> itemList = new List<Items>();
+
+            switch (type)
+            {
+                case "Enemy":
+                    Console.Write("Enter Damage: ");
+                    int damage = Convert.ToInt32(Console.ReadLine());
+
+                    Console.Write("Enter Experience: ");
+                    int experience = Convert.ToInt32(Console.ReadLine());
+
+                    Console.Write("Enter Level: ");
+                    int level = Convert.ToInt32(Console.ReadLine());
+
+                    Enemy enemy = new Enemy(name, life, type, damage, itemList, level, experience);
+                    enemies.Add(enemy);
+                    npcs.Add(enemy);
+                    break;
+                case "Seller":
+                    Console.Write("Enter Money: ");
+                    int money = Convert.ToInt32(Console.ReadLine());
+
+                    Shopkeeper seller = new Shopkeeper(name, life, type, money, itemList);
+                    sellers.Add(seller);
+                    npcs.Add(seller);
+                    break;
+                case "Converser":
+                    Console.Write("Enter Texts (separated by commas): ");
+                    string input = Console.ReadLine();
+
+                    List<string> textList = input.Split(',').Select(item => item.Trim()).ToList();
+
+                    Talkers converser = new Talkers(name, life, type, textList);
+                    npcs.Add(converser);
+                    break;
+            }
+        }
+
+        public void NPCData()
+        {
+            if (npcs.Count > 0)
+            {
+                foreach (NPC npc in npcs)
+                {
+                    Console.WriteLine("---------");
+                    if (npc is Enemy enemy)
+                    {
+                        Console.WriteLine(enemy.ShowData());
+                    }
+                    else if (npc is Shopkeeper seller)
+                    {
+                        Console.WriteLine(seller.ShowData());
+                    }
+                    else if (npc is Talkers converser)
+                    {
+                        Console.WriteLine(converser.ShowData());
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No hay NPCS.\n");
+            }
+        }
+
+        public void DeleteNPC()
+        {
+            int i = 0;
+            foreach (NPC npc in npcs)
+            {
+                Console.WriteLine(i + ". " + npc.name);
+                i++;
+            }
+            Console.WriteLine("¿Qué NPC quieres borrar?: (número)");
+            int option = Convert.ToInt32(Console.ReadLine());
+            npcs.RemoveAt(option);
+        }
+
+        public void CreateItem()
+        {
+            Console.WriteLine("¿Que items desea agregar a su inventario del jugador?\n1. Poción\n2. Arma");
+            int option = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Introducir el nombre del item");
+            string name = Console.ReadLine();
+            Console.WriteLine("Introducir el precio del item");
+            int price = Convert.ToInt32(Console.ReadLine());
+            switch (option)
+            {
+                case 1:
+                    Console.WriteLine("Introducir es la capacidad de la poción");
+                    int capacity = Convert.ToInt32(Console.ReadLine());
+
+                    items.Add(new Potion(name, "Poción", price, capacity));
+                    break;
+                case 2:
+                    Console.WriteLine("Introducir el daño del arma");
+                    int damage = Convert.ToInt32(Console.ReadLine());
+
+                    items.Add(new Potion(name, "Arma", price, damage));
+                    break;
+            }
+        }
+
+        public void ItemData()
+        {
+            if (items.Count > 0)
+            {
+                foreach (Items item in items)
+                {
+                    Console.WriteLine("---------");
+                    if (item is Weapon weapon)
+                    {
+                        Console.WriteLine(weapon.ShowData());
+                    }
+                    else if (item is Potion potion)
+                    {
+                        Console.WriteLine(potion.ShowData());
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No hay ITEMS.\n");
             }
 
         }
@@ -155,6 +363,10 @@ namespace ExamenGrupal
             {
                 Console.WriteLine("No hay Items que dar.");
             }
+        }
+        public void Exit()
+        {
+            endingFlag = false;
         }
 
     }

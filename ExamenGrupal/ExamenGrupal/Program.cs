@@ -10,7 +10,10 @@ namespace ExamenGrupal
     {
         static void Main(string[] args)
         {
-            while (true)
+            Menu menu = new Menu();
+            menu.Execute();
+
+            /*while (true)
             {
                 Console.WriteLine("Press X to exit");
                 ConsoleKeyInfo info = Console.ReadKey();
@@ -19,6 +22,7 @@ namespace ExamenGrupal
                     break;
                 }
             }
+            */
         }
     }
 }
